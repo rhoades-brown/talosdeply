@@ -1,0 +1,11 @@
+repos:
+  - repo: https://github.com/rhoades-brown/pre-commit.git
+    rev: 83c7cfbb61b9bdf7bb4601c14f046515d91205aa
+    hooks:
+      - id: terragrunt-hclfmt
+      - id: opentofu-fmt
+      - id: opentofu-validate
+      - id: tflint
+      - id: shellcheck
+      - id: gofmt
+      - id: golint
