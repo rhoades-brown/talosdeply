@@ -23,6 +23,12 @@ resource "proxmox_vm_qemu" "this" {
     firewall  = false
     link_down = false
   }
+
+  disk {
+    type               = "virtio"
+    size = "8G"
+    storage = var.storage
+  }
 }
 
 locals {
