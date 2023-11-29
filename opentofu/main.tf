@@ -36,12 +36,13 @@ module "worker" {
   storage       = var.proxmox.storage
   nameserver    = local.nameserver
   search_domain = local.search_domain
+  depends_on    = [module.controller]
 }
-
 module "talos" {
   source           = "./modules/talos"
   cluster_name     = var.cluster.name
   cluster_endpoint = var.cluster.endpoint
   controllers      = module.controller
   workers          = module.worker
+  depends_on       = [module.controller, module.worker]
 }

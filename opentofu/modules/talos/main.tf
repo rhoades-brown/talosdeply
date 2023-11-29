@@ -32,13 +32,11 @@ resource "talos_machine_configuration_apply" "controlplane" {
   machine_configuration_input = data.talos_machine_configuration.controlplane.machine_configuration
 
   node = var.controllers[count.index].ipaddress
-  #  config_patches = [
-  #    templatefile("${path.module}/templates/install-disk-and-hostname.yaml.tmpl", {
-  #      hostname     = each.value.hostname == null ? format("%s-cp-%s", var.cluster_name, index(keys(var.node_data.controlplanes), each.key)) : each.value.hostname
-  #      install_disk = each.value.install_disk
-  #    }),
-  #    file("${path.module}/files/cp-scheduling.yaml"),
-  #  ]
+  config_patches = [
+    templatefile("${path.module}/templates/configure-hostname.yaml.tmpl", {
+      hostname = var.controllers[count.index].name
+    })
+  ]
 }
 
 
@@ -47,12 +45,11 @@ resource "talos_machine_configuration_apply" "worker" {
   machine_configuration_input = data.talos_machine_configuration.worker.machine_configuration
   count                       = length(var.workers)
   node                        = var.workers[count.index].ipaddress
-  #  config_patches = [
-  #    templatefile("${path.module}/templates/install-disk-and-hostname.yaml.tmpl", {
-  #      hostname     = each.value.hostname == null ? format("%s-worker-%s", var.cluster_name, index(keys(var.node_data.workers), each.key)) : each.value.hostname
-  #      install_disk = each.value.install_disk
-  #    })
-  #  ]
+  config_patches = [
+    templatefile("${path.module}/templates/configure-hostname.yaml.tmpl", {
+      hostname = var.workers[count.index].name
+    })
+  ]
 }
 
 resource "talos_machine_bootstrap" "this" {
