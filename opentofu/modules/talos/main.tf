@@ -19,19 +19,19 @@ data "talos_machine_configuration" "worker" {
 }
 
 data "talos_client_configuration" "this" {
-  count = length(var.controllers)
+  count                = length(var.controllers)
   cluster_name         = var.cluster_name
   client_configuration = talos_machine_secrets.this.client_configuration
- endpoints            = var.controllers[*].ipaddress
- 
+  endpoints            = var.controllers[*].ipaddress
+
 }
 
 resource "talos_machine_configuration_apply" "controlplane" {
-    count = length(var.controllers)
+  count                       = length(var.controllers)
   client_configuration        = talos_machine_secrets.this.client_configuration
   machine_configuration_input = data.talos_machine_configuration.controlplane.machine_configuration
 
-  node                        = var.controllers[count.index].ipaddress
+  node = var.controllers[count.index].ipaddress
   #  config_patches = [
   #    templatefile("${path.module}/templates/install-disk-and-hostname.yaml.tmpl", {
   #      hostname     = each.value.hostname == null ? format("%s-cp-%s", var.cluster_name, index(keys(var.node_data.controlplanes), each.key)) : each.value.hostname
@@ -45,8 +45,8 @@ resource "talos_machine_configuration_apply" "controlplane" {
 resource "talos_machine_configuration_apply" "worker" {
   client_configuration        = talos_machine_secrets.this.client_configuration
   machine_configuration_input = data.talos_machine_configuration.worker.machine_configuration
-   count = length(var.workers)
-  node                        =  var.workers[count.index].ipaddress
+  count                       = length(var.workers)
+  node                        = var.workers[count.index].ipaddress
   #  config_patches = [
   #    templatefile("${path.module}/templates/install-disk-and-hostname.yaml.tmpl", {
   #      hostname     = each.value.hostname == null ? format("%s-worker-%s", var.cluster_name, index(keys(var.node_data.workers), each.key)) : each.value.hostname

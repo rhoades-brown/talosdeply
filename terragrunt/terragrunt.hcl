@@ -26,7 +26,7 @@ inputs = {
   }
 
   cluster = {
-    name     = "talos"
+    name = "talos"
     #endpoint = "https://talos.rhoades-brown.local:6443"
     endpoint = "https://192.168.1.61:6443"
   }

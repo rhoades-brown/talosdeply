@@ -25,8 +25,8 @@ resource "proxmox_vm_qemu" "this" {
   }
 
   disk {
-    type               = "virtio"
-    size = "8G"
+    type    = "virtio"
+    size    = "8G"
     storage = var.storage
   }
 }
