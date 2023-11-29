@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/rhoades-brown/pre-commit.git
-    rev: 83c7cfbb61b9bdf7bb4601c14f046515d91205aa
+    rev: fc077fa1533f657a9382b71327e539ffdf3b036f
     hooks:
       - id: terragrunt-hclfmt
       - id: opentofu-fmt
@@ -9,3 +9,8 @@ repos:
       - id: shellcheck
       - id: gofmt
       - id: golint
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0 # Use the ref you want to point at
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
