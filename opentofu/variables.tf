@@ -32,3 +32,10 @@ variable "proxmox" {
     search_domains = list(string)
   })
 }
+
+variable "cluster" {
+  type = object({
+    name     = string
+    endpoint = string
+  })
+}

@@ -24,6 +24,12 @@ inputs = {
     dns            = ["192.168.1.21", "192.168.1.22"]
     search_domains = ["rhoades-brown.local"]
   }
+
+  cluster = {
+    name     = "talos"
+    #endpoint = "https://talos.rhoades-brown.local:6443"
+    endpoint = "https://192.168.1.61:6443"
+  }
 }
 
 terraform {

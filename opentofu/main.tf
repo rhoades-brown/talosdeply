@@ -38,3 +38,10 @@ module "worker" {
   search_domain = local.search_domain
 }
 
+module "talos" {
+  source           = "./modules/talos"
+  cluster_name     = var.cluster.name
+  cluster_endpoint = var.cluster.endpoint
+  controllers      = module.controller
+  workers          = module.worker
+}
