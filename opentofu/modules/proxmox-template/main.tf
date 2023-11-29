@@ -1,5 +1,5 @@
 /* Uses Cloud-Init options from Proxmox 5.2 */
-resource "proxmox_vm_qemu" "cloudinit-test" {
+resource "proxmox_vm_qemu" "this" {
   name                    = var.name
   desc                    = var.description
   target_node             = var.target_node
