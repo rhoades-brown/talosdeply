@@ -45,3 +45,7 @@ module "talos" {
   workers          = module.worker
   depends_on       = [module.controller, module.worker]
 }
+
+module "sealed-secrets" {
+  source = "./modules/sealed-secrets"
+}
