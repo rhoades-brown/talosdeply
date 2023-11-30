@@ -1,9 +1,9 @@
 inputs = {
   controllers = {
     name_prefix   = "talos-controller"
-    quantity      = 1
+    quantity      = 2
     start_address = 61
-    cores         = 1
+    cores         = 2
     ram_gb        = 3
   }
 

@@ -1,13 +1,5 @@
-output "name" {
-  value = module.controller[*].name
-}
-
-output "ipaddress" {
-  value = module.controller[*].ipaddress
-}
-
 output "kubeconfig" {
-  value     = module.talos.kubeconfig
+  value     = module.talos.kubeconfig.kubeconfig_raw
   sensitive = true
 }
 

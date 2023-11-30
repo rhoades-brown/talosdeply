@@ -1,4 +1,3 @@
-
 locals {
   nameserver    = join(" ", var.proxmox.dns)
   search_domain = join(" ", var.proxmox.search_domains)
@@ -36,8 +35,8 @@ module "worker" {
   storage       = var.proxmox.storage
   nameserver    = local.nameserver
   search_domain = local.search_domain
-  depends_on    = [module.controller]
 }
+
 module "talos" {
   source           = "./modules/talos"
   cluster_name     = var.cluster.name
