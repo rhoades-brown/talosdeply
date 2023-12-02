@@ -3,5 +3,5 @@ output "kubeconfig" {
 }
 
 output "client_configuration" {
-  value = data.talos_client_configuration.this[0].talos_config
+  value = data.talos_client_configuration.this[0]
 }
