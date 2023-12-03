@@ -47,5 +47,11 @@ module "talos" {
 }
 
 module "sealed-secrets" {
-  source = "./modules/sealed-secrets"
+  source     = "./modules/sealed-secrets"
+  depends_on = [module.talos]
+}
+
+module "argocd" {
+  source     = "./modules/argocd"
+  depends_on = [module.sealed-secrets]
 }

@@ -66,6 +66,25 @@ Talos provide a pre-built image that is compatable with cloud-init. This allows 
 1. Convert to Template
    1. Select the VM Choose More --> Convert to Template
 
+### Create ArgoCD Secret
+
+``` yaml
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: private-repo-creds
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repo-creds
+stringData:
+  type: git
+  url: https://github.com/<GITHUB USERNAME>
+  username: < GITHUB USERNAME >
+  password: < PASSWORD >
+
+```
+
 ### Create Cluster
 
 ```bash
