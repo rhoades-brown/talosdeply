@@ -1,10 +1,10 @@
 repos:
-  - repo: https://github.com/rhoades-brown/pre-commit.git
-    rev: fc077fa1533f657a9382b71327e539ffdf3b036f
+  - repo: https://github.com/gruntwork-io/pre-commit.git
+    rev: v0.1.23
     hooks:
       - id: terragrunt-hclfmt
-      - id: opentofu-fmt
-      - id: opentofu-validate
+      - id: terraform-fmt
+      - id: terraform-validate
       - id: tflint
       - id: shellcheck
       - id: gofmt
