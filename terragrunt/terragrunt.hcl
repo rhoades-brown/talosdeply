@@ -33,5 +33,5 @@ inputs = {
 }
 
 terraform {
-  source = "../opentofu"
+  source = "../terraform"
 }
