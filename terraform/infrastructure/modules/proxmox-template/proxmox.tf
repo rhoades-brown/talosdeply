@@ -7,6 +7,7 @@ resource "proxmox_vm_qemu" "this" {
   memory                  = var.ram * 1024
   clone                   = "talos-template"
   scsihw                  = "virtio-scsi-single"
+  full_clone              = true
   tablet                  = false
   automatic_reboot        = true
   boot                    = "order=scsi0"
@@ -24,15 +25,15 @@ resource "proxmox_vm_qemu" "this" {
     link_down = false
   }
 
-  disk {
-    type     = "scsi"
-    size     = "8G"
-    storage  = var.storage
-    iothread = 0
-  }
+  #  disk {
+  #    type     = "scsi"
+  #    size     = "8G"
+  #    storage  = var.storage
+  #    iothread = 0
+  #  }
 }
 
 locals {
-  ipaddress = cidrhost(var.subnet, var.start_address + var.hostnumber - 1)
+  ipaddress = cidrhost(var.subnet, var.start_address + var.hostnumber)
   subnet    = element(split("/", var.subnet), 1)
 }

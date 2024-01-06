@@ -36,7 +36,9 @@ resource "talos_machine_configuration_apply" "controlplane" {
     templatefile("${path.module}/templates/configure-hostname.yaml.tmpl", {
       hostname = var.controllers[count.index].name
     }),
-    file("${path.module}/files/cp-scheduling.yaml"),
+    templatefile("${path.module}/templates/configure-vip.yaml.tmpl", {
+      endpoint_vip = var.endpoint_vip
+    }),
   ]
 }
 

@@ -8,11 +8,9 @@ variable "cluster_endpoint" {
   description = "The cluster endpoint"
 }
 
-variable "workers" {
-  type = list(object({
-    name      = string
-    ipaddress = string
-  }))
+variable "endpoint_vip" {
+  type        = string
+  description = "The ip addess of the cluster endpoint"
 }
 
 variable "controllers" {
@@ -21,3 +19,17 @@ variable "controllers" {
     ipaddress = string
   }))
 }
+
+variable "workers" {
+  type = list(object({
+    name      = string
+    ipaddress = string
+  }))
+}
+
+//variable "controllers" {
+//  type = list(object({
+//    name      = string
+//    ipaddress = string
+//  }))
+//}

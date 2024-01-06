@@ -12,7 +12,8 @@ Ensure the following tools are installed:
 - [Terragrunt](https://terragrunt.gruntwork.io/docs/getting-started/install/) - Make terraform DRY
 - [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/) - Essential tools to maintain kubernetes
 - Talos CLI - Tool to maintain talos nodes
-  ```
+
+  ``` bash
   curl -sL https://talos.dev/install | sh
   ```
 
@@ -68,7 +69,10 @@ Talos provide a pre-built image that is compatable with cloud-init. This allows 
 
 ### Create ArgoCD Secret
 
-``` yaml
+Create the secret
+
+```bash
+kubeseal <<EOF
 ---
 apiVersion: v1
 kind: Secret
@@ -82,17 +86,23 @@ stringData:
   url: https://github.com/<GITHUB USERNAME>
   username: < GITHUB USERNAME >
   password: < PASSWORD >
-
+EOF
 ```
 
 ### Create Cluster
 
 ```bash
 cd terragrunt
+terragrunt apply --target module.talos
+```
+
+Install the additional components:
+
+```bash
 terragrunt apply
 ```
 
-### Setup the command line tools:
+### Setup the command line tools
 
 ```bash
 terragrunt output -raw kube_config > $HOME/.kube/config
