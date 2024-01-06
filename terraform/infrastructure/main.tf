@@ -43,6 +43,7 @@ module "worker" {
   storage       = var.proxmox.storage
   nameserver    = local.nameserver
   search_domain = local.search_domain
+  depends_on    = [module.controller]
 }
 
 
