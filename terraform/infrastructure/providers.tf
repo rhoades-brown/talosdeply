@@ -19,6 +19,11 @@ terraform {
       source  = "hashicorp/kubernetes"
       version = "2.24.0"
     }
+
+    local = {
+      source  = "hashicorp/local"
+      version = "2.4.1"
+    }
   }
 }
 
@@ -28,5 +33,9 @@ provider "proxmox" {
 }
 
 provider "talos" {
+  # Configuration options
+}
+
+provider "local" {
   # Configuration options
 }

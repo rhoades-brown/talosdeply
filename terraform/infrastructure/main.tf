@@ -62,3 +62,15 @@ module "talos" {
   endpoint_vip = var.cluster.endpoint_vip
   depends_on   = [module.controller, module.worker]
 }
+
+resource "local_file" "kubeconfig" {
+  depends_on = [module.talos]
+  content    = module.talos.kubeconfig.kubeconfig_raw
+  filename   = pathexpand("~/.kube/config")
+}
+
+resource "local_file" "talosconfig" {
+  depends_on = [module.talos]
+  content    = module.talos.client_configuration.talos_config
+  filename   = pathexpand("~/.talos/config")
+}
