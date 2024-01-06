@@ -23,7 +23,7 @@ data "talos_client_configuration" "this" {
   cluster_name         = var.cluster_name
   client_configuration = talos_machine_secrets.this.client_configuration
   endpoints            = var.controllers[*].ipaddress
-
+  nodes                = concat(var.controllers[*].ipaddress, var.workers[*].ipaddress)
 }
 
 resource "talos_machine_configuration_apply" "controlplane" {
@@ -51,7 +51,9 @@ resource "talos_machine_configuration_apply" "worker" {
   config_patches = [
     templatefile("${path.module}/templates/configure-hostname.yaml.tmpl", {
       hostname = var.workers[count.index].name
-    })
+    }),
+    templatefile("${path.module}/templates/configure-worker.yaml.tmpl", {
+    }),
   ]
 }
 
