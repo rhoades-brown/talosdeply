@@ -1,13 +1,13 @@
 terraform {
   required_providers {
     proxmox = {
-      source  = "TheGameProfi/proxmox"
-      version = "2.9.16"
+      source  = "Telmate/proxmox"
+      version = "3.0.1-rc1"
     }
 
     talos = {
       source  = "siderolabs/talos"
-      version = "0.4.0-alpha.0"
+      version = "0.4.0"
     }
 
     helm = {

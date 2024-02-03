@@ -13,6 +13,21 @@ resource "helm_release" "argocd" {
     name  = "configs.params.server\\.insecure"
     value = true
   }
+
+  set {
+    name  = "server.ingress.enabled"
+    value = true
+  }
+
+  set {
+    name  = "server.ingress.hosts[0]"
+    value = "argocd.services.rhoades-brown.local"
+  }
+
+  set {
+    name  = "server.ingress.ingressClassName"
+    value = "nginx"
+  }
 }
 
 resource "helm_release" "argocdcreds" {

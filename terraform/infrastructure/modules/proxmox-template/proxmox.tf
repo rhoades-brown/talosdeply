@@ -10,7 +10,7 @@ resource "proxmox_vm_qemu" "this" {
   full_clone              = true
   tablet                  = false
   automatic_reboot        = true
-  boot                    = "order=scsi0"
+  boot                    = "order=virtio0"
   qemu_os                 = "l26"
   os_type                 = "cloud-init"
   cloudinit_cdrom_storage = var.storage
@@ -25,12 +25,16 @@ resource "proxmox_vm_qemu" "this" {
     link_down = false
   }
 
-  #  disk {
-  #    type     = "scsi"
-  #    size     = "8G"
-  #    storage  = var.storage
-  #    iothread = 0
-  #  }
+  disks {
+    virtio {
+      virtio0 {
+        disk {
+          size    = 18
+          storage = var.storage
+        }
+      }
+    }
+  }
 }
 
 locals {
