@@ -39,5 +39,6 @@ variable "cluster" {
     name         = string
     endpoint     = string
     endpoint_vip = string
+    domain       = string
   })
 }

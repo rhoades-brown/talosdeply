@@ -47,3 +47,7 @@ variable "search_domain" {
 variable "description" {
   type = string
 }
+
+variable "dns" {
+  type = set(string)
+}

@@ -19,6 +19,7 @@ module "controller" {
   hostnumber    = index(local.controllers, each.key)
   gateway       = var.proxmox.gateway
   subnet        = var.proxmox.subnet
+  dns = var.proxmox.dns
   start_address = var.controllers.start_address
   ram           = var.controllers.ram_gb
   cores         = var.controllers.cores
@@ -36,6 +37,7 @@ module "worker" {
   hostnumber    = index(local.workers, each.key) + 1
   gateway       = var.proxmox.gateway
   subnet        = var.proxmox.subnet
+  dns = var.proxmox.dns
   start_address = var.workers.start_address
   ram           = var.workers.ram_gb
   cores         = var.workers.cores
@@ -51,6 +53,7 @@ module "talos" {
   source           = "./modules/talos"
   cluster_name     = var.cluster.name
   cluster_endpoint = var.cluster.endpoint
+  domain           = var.cluster.domain
   controllers = [for key, value in module.controller : {
     name      = key
     ipaddress = value.ipaddress

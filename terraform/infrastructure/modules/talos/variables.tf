@@ -8,6 +8,11 @@ variable "cluster_endpoint" {
   description = "The cluster endpoint"
 }
 
+variable "domain" {
+  type = string
+  description = "The hosts' domain"
+}
+
 variable "endpoint_vip" {
   type        = string
   description = "The ip addess of the cluster endpoint"

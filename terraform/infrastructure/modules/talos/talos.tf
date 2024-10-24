@@ -30,11 +30,11 @@ resource "talos_machine_configuration_apply" "controlplane" {
   count                       = length(var.controllers)
   client_configuration        = talos_machine_secrets.this.client_configuration
   machine_configuration_input = data.talos_machine_configuration.controlplane.machine_configuration
-
-  node = var.controllers[count.index].ipaddress
+  apply_mode                  = "reboot"
+  node                        = var.controllers[count.index].ipaddress
   config_patches = [
     templatefile("${path.module}/templates/configure-hostname.yaml.tmpl", {
-      hostname = var.controllers[count.index].name
+      hostname = "${var.controllers[count.index].name}.${var.domain}"
     }),
     templatefile("${path.module}/templates/configure-vip.yaml.tmpl", {
       endpoint_vip = var.endpoint_vip
@@ -46,11 +46,12 @@ resource "talos_machine_configuration_apply" "controlplane" {
 resource "talos_machine_configuration_apply" "worker" {
   client_configuration        = talos_machine_secrets.this.client_configuration
   machine_configuration_input = data.talos_machine_configuration.worker.machine_configuration
+  apply_mode                  = "reboot"
   count                       = length(var.workers)
   node                        = var.workers[count.index].ipaddress
   config_patches = [
     templatefile("${path.module}/templates/configure-hostname.yaml.tmpl", {
-      hostname = var.workers[count.index].name
+      hostname = "${var.workers[count.index].name}.${var.domain}"
     }),
     templatefile("${path.module}/templates/configure-worker.yaml.tmpl", {
     }),
